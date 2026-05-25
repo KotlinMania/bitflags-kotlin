@@ -94,4 +94,3 @@ do not treat them as the next implementation target by default.
 | Source | Expected target | Deps | Source path | Expected path |
 |--------|-----------------|------|-------------|---------------|
 | `lib` | `Lib` | 0 | `lib.rs` | `Lib.kt` |
-
