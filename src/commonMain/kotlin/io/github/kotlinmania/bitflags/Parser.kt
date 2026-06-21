@@ -68,8 +68,9 @@ public fun <B : BitFlags<B>> fromText(input: String, seed: B): B {
         val parsedFlag =
             if (flag.startsWith("0x")) {
                 val hex = flag.removePrefix("0x")
-                val bits = hex.toULongOrNull(16)
-                    ?: throw IllegalArgumentException(ParseError(ParseErrorKind.INVALID_HEX_FLAG, hex).toString())
+                val bits =
+                    hex.toULongOrNull(16)
+                        ?: throw IllegalArgumentException(ParseError(ParseErrorKind.INVALID_HEX_FLAG, hex).toString())
                 seed.fromBitsRetain(bits)
             } else {
                 seed.fromName(flag)
@@ -134,8 +135,9 @@ public fun <B : BitFlags<B>> fromTextStrict(input: String, seed: B): B {
             )
         }
 
-        val parsedFlag = seed.fromName(flag)
-            ?: throw IllegalArgumentException(ParseError(ParseErrorKind.INVALID_NAMED_FLAG, flag).toString())
+        val parsedFlag =
+            seed.fromName(flag)
+                ?: throw IllegalArgumentException(ParseError(ParseErrorKind.INVALID_NAMED_FLAG, flag).toString())
         parsedFlags = parsedFlags.insert(parsedFlag)
     }
 

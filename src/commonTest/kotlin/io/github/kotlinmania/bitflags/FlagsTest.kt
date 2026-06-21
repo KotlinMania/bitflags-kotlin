@@ -60,8 +60,18 @@ class FlagsTest {
     @Test
     fun iteratorsYieldNamedFlagsThenRemainingBits() {
         val value = ExampleFlags.fromBitsRetain(0b1011uL)
-        val named = value.iterNames().asSequence().map { it.name to it.flag.bits() }.toList()
-        val all = value.iter().asSequence().map { it.bits() }.toList()
+        val named =
+            value
+                .iterNames()
+                .asSequence()
+                .map { it.name to it.flag.bits() }
+                .toList()
+        val all =
+            value
+                .iter()
+                .asSequence()
+                .map { it.bits() }
+                .toList()
 
         assertEquals(listOf("A" to 1uL, "B" to 2uL), named)
         assertEquals(listOf(1uL, 2uL, 0b1000uL), all)

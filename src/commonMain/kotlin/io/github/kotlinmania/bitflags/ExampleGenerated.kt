@@ -30,12 +30,13 @@ public class ExampleFlags private constructor(
         public val ABC: ExampleFlags = ExampleFlags(A.bits() or B.bits() or C.bits())
         public val UNNAMED_ALL: ExampleFlags = ExampleFlags(ULong.MAX_VALUE)
 
-        public val FLAGS: List<Flag<ExampleFlags>> = listOf(
-            Flag("A", A),
-            Flag("B", B),
-            Flag("C", C),
-            Flag("ABC", ABC),
-        )
+        public val FLAGS: List<Flag<ExampleFlags>> =
+            listOf(
+                Flag("A", A),
+                Flag("B", B),
+                Flag("C", C),
+                Flag("ABC", ABC),
+            )
 
         public val EXTERNAL_FLAGS: List<Flag<ExampleFlags>> = FLAGS + Flag("", UNNAMED_ALL)
 
@@ -71,13 +72,14 @@ public class ExampleExternalFlags private constructor(
         public val ABC: ExampleExternalFlags = ExampleExternalFlags(A.bits() or B.bits() or C.bits())
         public val UNNAMED_ALL: ExampleExternalFlags = ExampleExternalFlags(ULong.MAX_VALUE)
 
-        public val FLAGS: List<Flag<ExampleExternalFlags>> = listOf(
-            Flag("A", A),
-            Flag("B", B),
-            Flag("C", C),
-            Flag("ABC", ABC),
-            Flag("", UNNAMED_ALL),
-        )
+        public val FLAGS: List<Flag<ExampleExternalFlags>> =
+            listOf(
+                Flag("A", A),
+                Flag("B", B),
+                Flag("C", C),
+                Flag("ABC", ABC),
+                Flag("", UNNAMED_ALL),
+            )
 
         public fun empty(): ExampleExternalFlags = ExampleExternalFlags(0uL)
     }
