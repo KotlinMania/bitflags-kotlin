@@ -1,21 +1,11 @@
-#if canImport(Testing)
 import Testing
 import Bitflags
 
 @Suite("Bitflags Swift Export Tests")
 struct BitflagsExportTests {
-    @Test("Bitflags swift module imported cleanly")
+    @Test("Bitflags swift module imported cleanly and enum behaves as expected")
     func swiftModuleLoads() {
-        #expect(true, "Bitflags swift module imported cleanly")
+        let kind = ParseErrorKind.EMPTY_FLAG
+        #expect(kind.description == "EMPTY_FLAG")
     }
 }
-#elseif canImport(XCTest)
-import XCTest
-import Bitflags
-
-final class BitflagsExportTests: XCTestCase {
-    func testSwiftModuleLoads() throws {
-        XCTAssertTrue(true, "Bitflags swift module imported cleanly")
-    }
-}
-#endif
