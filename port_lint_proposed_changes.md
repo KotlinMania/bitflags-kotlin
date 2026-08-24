@@ -1,6 +1,6 @@
 # port-lint Proposed Changes
 
-**Generated:** 2026-05-24
+**Generated:** 2026-08-23
 **Source:** tmp/bitflags/src
 **Target:** src/commonMain/kotlin/io/github/kotlinmania/bitflags
 

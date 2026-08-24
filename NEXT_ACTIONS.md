@@ -5,13 +5,13 @@ Based on AST analysis, here are the concrete next steps.
 ## Summary
 
 - **Files Present:** 4/42 (9.5%)
-- **Function parity:** 32/134 matched (target 58) — 23.9%
-- **Class/type parity:** 4/20 matched (target 10) — 20.0%
-- **Combined symbol parity:** 36/154 matched (target 68) — 23.4%
-- **Average inline-code cosine:** 0.20 (function body across 4 matched files)
-- **Average documentation cosine:** 0.68 (doc text across 4 matched files)
+- **Function parity:** 45/134 matched (target 76) — 33.6%
+- **Class/type parity:** 16/20 matched (target 22) — 80.0%
+- **Combined symbol parity:** 61/154 matched (target 98) — 39.6%
+- **Average inline-code cosine:** 0.49 (function body across 4 matched files)
+- **Average documentation cosine:** 0.73 (doc text across 4 matched files)
 - **Cheat-zeroed Files:** 1
-- **Critical Issues:** 3 files with <0.60 function similarity
+- **Critical Issues:** 2 files with <0.60 function similarity
 
 ## Priority 1: Fix Incomplete High-Dependency Files
 
@@ -29,38 +29,38 @@ Critical missing files (>10 dependencies):
 
 Every matched file is listed below with function and type symbol parity.
 
-### 1. parser
+### 1. iter
 
-- **Target:** `bitflags.Parser`
-- **Similarity:** 0.00
+- **Target:** `bitflags.Iter`
+- **Similarity:** 0.56
 - **Dependents:** 0
-- **Priority Score:** 131510.0
-- **Functions:** 0/10 matched (target 6)
-- **Missing functions:** `to_writer`, `fmt`, `from_str`, `to_writer_truncate`, `from_str_truncate`, `to_writer_strict`, `from_str_strict`, `invalid_hex_flag`, `invalid_named_flag`, `empty_flag`
-- **Types:** 2/5 matched (target 2)
-- **Missing types:** `AsDisplay`, `WriteHex`, `ParseHex`
+- **Priority Score:** 20804.4
+- **Functions:** 4/4 matched (target 12)
+- **Missing functions:** _none_
+- **Types:** 2/4 matched (target 6)
+- **Missing types:** `Iter`, `IterNames`
 
 ### 2. traits
 
 - **Target:** `bitflags.Traits`
-- **Similarity:** 0.65
+- **Similarity:** 0.68
 - **Dependents:** 0
-- **Priority Score:** 84003.5
-- **Functions:** 30/31 matched
-- **Missing functions:** `new`
-- **Types:** 2/9 matched (target 2)
-- **Missing types:** `Flags`, `Bits`, `Primitive`, `PublicFlags`, `Iter`, `IterNames`, `ImplementedByBitFlagsMacro`
+- **Priority Score:** 4003.2
+- **Functions:** 31/31 matched (target 32)
+- **Missing functions:** _none_
+- **Types:** 9/9 matched
+- **Missing types:** _none_
 
-### 3. iter
+### 3. parser
 
-- **Target:** `bitflags.Iter`
-- **Similarity:** 0.17
+- **Target:** `bitflags.Parser`
+- **Similarity:** 0.72
 - **Dependents:** 0
-- **Priority Score:** 60808.3
-- **Functions:** 2/4 matched (target 7)
-- **Missing functions:** `new`, `__private_const_new`
-- **Types:** 0/4 matched
-- **Missing types:** `Iter`, `Item`, `IterNames`, `IterDefinedNames`
+- **Priority Score:** 1502.8
+- **Functions:** 10/10 matched (target 18)
+- **Missing functions:** _none_
+- **Types:** 5/5 matched
+- **Missing types:** _none_
 
 ### 4. example_generated
 
@@ -94,3 +94,4 @@ do not treat them as the next implementation target by default.
 | Source | Expected target | Deps | Source path | Expected path |
 |--------|-----------------|------|-------------|---------------|
 | `lib` | `Lib` | 0 | `lib.rs` | `Lib.kt` |
+
