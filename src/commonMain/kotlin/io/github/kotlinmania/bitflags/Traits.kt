@@ -32,7 +32,53 @@ public data class Flag<B : BitFlags<B>>(
      * Whether this flag has no name.
      */
     public fun isUnnamed(): Boolean = flagName.isEmpty()
+
+    public companion object {
+        /**
+         * Create a new flag with the given name and value.
+         */
+        public fun <B : BitFlags<B>> new(name: String, value: B): Flag<B> = Flag(name, value)
+    }
 }
+
+/**
+ * Common trait representing bitflags types.
+ */
+public typealias Flags<B> = BitFlags<B>
+
+/**
+ * An iterator over contained flag values.
+ */
+public typealias Iter<B> = FlagIterator<B>
+
+/**
+ * An iterator over contained, defined, named flags.
+ */
+public typealias IterNames<B> = NamedFlagIterator<B>
+
+/**
+ * Underlying integer storage representation for flags.
+ */
+@HiddenFromObjC
+public interface Bits
+
+/**
+ * Marker for primitive bit integer types.
+ */
+@HiddenFromObjC
+public interface Primitive
+
+/**
+ * Marker for public flags structures.
+ */
+@HiddenFromObjC
+public interface PublicFlags
+
+/**
+ * Marker interface for types generated or implementing the bitflags macro pattern.
+ */
+@HiddenFromObjC
+public interface ImplementedByBitFlagsMacro
 
 /**
  * A set of defined flags using an unsigned integer as storage.

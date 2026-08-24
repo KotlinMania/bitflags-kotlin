@@ -15,6 +15,16 @@ public data class NamedFlag<B : BitFlags<B>>(
 )
 
 /**
+ * Item yielded by flag iterators.
+ */
+public typealias Item<B> = NamedFlag<B>
+
+/**
+ * An iterator over all defined named flags.
+ */
+public typealias IterDefinedNames<B> = DefinedNamedFlagIterator<B>
+
+/**
  * An iterator over contained flag values.
  *
  * Defined named flags are yielded first, with any remaining bits yielded as a
@@ -26,6 +36,22 @@ public class FlagIterator<B : BitFlags<B>> internal constructor(
 ) : Iterator<B> {
     private val inner = NamedFlagIterator(flags)
     private var done = false
+
+    public companion object {
+        /**
+         * Create an iterator over the flags values in [flags].
+         */
+        public fun <B : BitFlags<B>> new(flags: BitFlags<B>): FlagIterator<B> = FlagIterator(flags)
+
+        /**
+         * Internal constructor used by bitflags generation.
+         */
+        public fun <B : BitFlags<B>> __private_const_new(
+            flags: List<Flag<B>>,
+            source: B,
+            remaining: B,
+        ): FlagIterator<B> = FlagIterator(source)
+    }
 
     override fun hasNext(): Boolean = !done && (inner.hasNext() || !inner.remaining().isEmpty())
 
@@ -101,6 +127,22 @@ public class NamedFlagIterator<B : BitFlags<B>> internal constructor(
         nextValue = null
         return value
     }
+
+    public companion object {
+        /**
+         * Create an iterator over the named flags in [flags].
+         */
+        public fun <B : BitFlags<B>> new(flags: BitFlags<B>): NamedFlagIterator<B> = NamedFlagIterator(flags)
+
+        /**
+         * Internal constructor used by bitflags generation.
+         */
+        public fun <B : BitFlags<B>> __private_const_new(
+            flags: List<Flag<B>>,
+            source: B,
+            remaining: B,
+        ): NamedFlagIterator<B> = NamedFlagIterator(source)
+    }
 }
 
 /**
@@ -113,6 +155,13 @@ public class DefinedNamedFlagIterator<B : BitFlags<B>> internal constructor(
     private val definitions = flags.flags()
     private var index = 0
     private var nextValue: NamedFlag<B>? = null
+
+    public companion object {
+        /**
+         * Create an iterator over all defined named flags in [flags].
+         */
+        public fun <B : BitFlags<B>> new(flags: BitFlags<B>): DefinedNamedFlagIterator<B> = DefinedNamedFlagIterator(flags)
+    }
 
     override fun hasNext(): Boolean {
         if (nextValue != null) {
