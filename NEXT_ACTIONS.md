@@ -4,10 +4,10 @@ Based on AST analysis, here are the concrete next steps.
 
 ## Summary
 
-- **Files Present:** 4/42 (9.5%)
-- **Function parity:** 45/134 matched (target 76) — 33.6%
-- **Class/type parity:** 16/20 matched (target 22) — 80.0%
-- **Combined symbol parity:** 61/154 matched (target 98) — 39.6%
+- **Files Present:** 4/98 (4.1%)
+- **Function parity:** 45/248 matched (target 76) — 18.1%
+- **Class/type parity:** 16/46 matched (target 22) — 34.8%
+- **Combined symbol parity:** 61/294 matched (target 98) — 20.7%
 - **Average inline-code cosine:** 0.49 (function body across 4 matched files)
 - **Average documentation cosine:** 0.73 (doc text across 4 matched files)
 - **Cheat-zeroed Files:** 1
@@ -22,7 +22,7 @@ No incomplete high-dependency files detected.
 Critical missing files (>10 dependencies):
 
 1. **tests.flags** (25 deps)
-   - Path: `tests/flags.rs`
+   - Path: `src/tests/flags.rs`
    - Essential for 25 other files
 
 ## Detailed Work Items
@@ -31,7 +31,7 @@ Every matched file is listed below with function and type symbol parity.
 
 ### 1. iter
 
-- **Target:** `bitflags.Iter`
+- **Target:** `bitflags.Iter [PROVENANCE-FALLBACK]`
 - **Similarity:** 0.56
 - **Dependents:** 0
 - **Priority Score:** 20804.4
@@ -39,10 +39,13 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 2/4 matched (target 6)
 - **Missing types:** `Iter`, `IterNames`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `iter.rs` vs expected `iter.rs`
+- **Proposed provenance header:** `// port-lint: source iter.rs` (current: `// port-lint: source iter.rs`)
+- **Lint issues:** 1
 
 ### 2. traits
 
-- **Target:** `bitflags.Traits`
+- **Target:** `bitflags.Traits [PROVENANCE-FALLBACK]`
 - **Similarity:** 0.68
 - **Dependents:** 0
 - **Priority Score:** 4003.2
@@ -50,10 +53,13 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 9/9 matched
 - **Missing types:** _none_
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `traits.rs` vs expected `traits.rs`
+- **Proposed provenance header:** `// port-lint: source traits.rs` (current: `// port-lint: source traits.rs`)
+- **Lint issues:** 1
 
 ### 3. parser
 
-- **Target:** `bitflags.Parser`
+- **Target:** `bitflags.Parser [PROVENANCE-FALLBACK]`
 - **Similarity:** 0.72
 - **Dependents:** 0
 - **Priority Score:** 1502.8
@@ -61,10 +67,13 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 5/5 matched
 - **Missing types:** _none_
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `parser.rs` vs expected `parser.rs`
+- **Proposed provenance header:** `// port-lint: source parser.rs` (current: `// port-lint: source parser.rs`)
+- **Lint issues:** 1
 
 ### 4. example_generated
 
-- **Target:** `bitflags.ExampleGenerated [ZERO]`
+- **Target:** `bitflags.ExampleGenerated [ZERO] [PROVENANCE-FALLBACK]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
@@ -72,6 +81,9 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 2)
 - **Missing types:** _none_
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `example_generated.rs` vs expected `example_generated.rs`
+- **Proposed provenance header:** `// port-lint: source example_generated.rs` (current: `// port-lint: source example_generated.rs`)
+- **Lint issues:** 1
 
 ## Success Criteria
 
@@ -93,5 +105,5 @@ do not treat them as the next implementation target by default.
 
 | Source | Expected target | Deps | Source path | Expected path |
 |--------|-----------------|------|-------------|---------------|
-| `lib` | `Lib` | 0 | `lib.rs` | `Lib.kt` |
+| `lib` | `Lib` | 0 | `src/lib.rs` | `Lib.kt` |
 
