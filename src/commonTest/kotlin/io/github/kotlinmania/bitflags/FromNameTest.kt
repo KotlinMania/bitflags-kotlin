@@ -1,29 +1,29 @@
-// port-lint: tests tests/basic.rs
+// port-lint: tests src/tests/from_name.rs
 package io.github.kotlinmania.bitflags
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertNull
 
-class FromNameTest {
+public class FromNameTest {
     @Test
-    fun testFromNameLookup() {
-        val a = ExampleFlags.empty().fromName("A")
-        assertEquals(ExampleFlags.A, a)
+    public fun cases() {
+        case(1uL, "A", TestFlags.fromName("A"))
+        case(1uL shl 1, "B", TestFlags.fromName("B"))
+        case(1uL or (1uL shl 1) or (1uL shl 2), "ABC", TestFlags.fromName("ABC"))
 
-        val b = ExampleFlags.empty().fromName("B")
-        assertEquals(ExampleFlags.B, b)
+        case(null, "", TestFlags.fromName(""))
+        case(null, "a", TestFlags.fromName("a"))
+        case(null, "0x1", TestFlags.fromName("0x1"))
+        case(null, "A | B", TestFlags.fromName("A | B"))
 
-        val c = ExampleFlags.empty().fromName("C")
-        assertEquals(ExampleFlags.C, c)
+        case(0uL, "ZERO", TestZero.fromName("ZERO"))
+        case(2uL, "二", TestUnicode.fromName("二"))
 
-        val abc = ExampleFlags.empty().fromName("ABC")
-        assertEquals(ExampleFlags.ABC, abc)
+        case(null, "_", TestExternal.fromName("_"))
+        case(null, "", TestExternal.fromName(""))
+    }
 
-        val missing = ExampleFlags.empty().fromName("NON_EXISTENT")
-        assertNull(missing)
-
-        val emptyName = ExampleFlags.empty().fromName("")
-        assertNull(emptyName)
+    private fun <T : BitFlags<T>> case(expected: ULong?, input: String, inherent: T?) {
+        assertEquals(expected, inherent?.bits(), "T::fromName($input)")
     }
 }
