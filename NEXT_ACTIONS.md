@@ -4,14 +4,14 @@ Based on AST analysis, here are the concrete next steps.
 
 ## Summary
 
-- **Files Present:** 4/42 (9.5%)
-- **Function parity:** 45/134 matched (target 76) — 33.6%
-- **Class/type parity:** 16/20 matched (target 22) — 80.0%
-- **Combined symbol parity:** 61/154 matched (target 98) — 39.6%
-- **Average inline-code cosine:** 0.49 (function body across 4 matched files)
-- **Average documentation cosine:** 0.73 (doc text across 4 matched files)
-- **Cheat-zeroed Files:** 1
-- **Critical Issues:** 2 files with <0.60 function similarity
+- **Files Present:** 5/42 (11.9%)
+- **Function parity:** 45/134 matched (target 243) — 33.6%
+- **Class/type parity:** 16/20 matched (target 34) — 80.0%
+- **Combined symbol parity:** 61/154 matched (target 277) — 39.6%
+- **Average inline-code cosine:** 0.39 (function body across 5 matched files)
+- **Average documentation cosine:** 0.58 (doc text across 5 matched files)
+- **Cheat-zeroed Files:** 2
+- **Critical Issues:** 3 files with <0.60 function similarity
 
 ## Priority 1: Fix Incomplete High-Dependency Files
 
@@ -31,14 +31,17 @@ Every matched file is listed below with function and type symbol parity.
 
 ### 1. iter
 
-- **Target:** `bitflags.Iter`
+- **Target:** `bitflags.Iter [PROVENANCE-FALLBACK]`
 - **Similarity:** 0.56
 - **Dependents:** 0
 - **Priority Score:** 20804.4
-- **Functions:** 4/4 matched (target 12)
+- **Functions:** 4/4 matched (target 18)
 - **Missing functions:** _none_
-- **Types:** 2/4 matched (target 6)
+- **Types:** 2/4 matched (target 7)
 - **Missing types:** `Iter`, `IterNames`
+- **Provenance warning:** port-lint provenance header matched only by basename: `tests:src/tests/iter.rs` vs expected `iter.rs`
+- **Proposed provenance header:** `// port-lint: tests iter.rs` (current: `// port-lint: tests src/tests/iter.rs`)
+- **Lint issues:** 1
 
 ### 2. traits
 
@@ -46,23 +49,37 @@ Every matched file is listed below with function and type symbol parity.
 - **Similarity:** 0.68
 - **Dependents:** 0
 - **Priority Score:** 4003.2
-- **Functions:** 31/31 matched (target 32)
+- **Functions:** 31/31 matched (target 39)
 - **Missing functions:** _none_
 - **Types:** 9/9 matched
 - **Missing types:** _none_
 
 ### 3. parser
 
-- **Target:** `bitflags.Parser`
+- **Target:** `bitflags.Parser [PROVENANCE-FALLBACK]`
 - **Similarity:** 0.72
 - **Dependents:** 0
 - **Priority Score:** 1502.8
-- **Functions:** 10/10 matched (target 18)
+- **Functions:** 10/10 matched (target 21)
 - **Missing functions:** _none_
-- **Types:** 5/5 matched
+- **Types:** 5/5 matched (target 6)
+- **Missing types:** _none_
+- **Provenance warning:** port-lint provenance header matched only by basename: `tests:src/tests/parser.rs` vs expected `parser.rs`
+- **Proposed provenance header:** `// port-lint: tests parser.rs` (current: `// port-lint: tests src/tests/parser.rs`)
+- **Lint issues:** 1
+
+### 4. tests
+
+- **Target:** `bitflags.TestTypes [ZERO]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10.0
+- **Functions:** 0/0 matched (target 151)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 10)
 - **Missing types:** _none_
 
-### 4. example_generated
+### 5. example_generated
 
 - **Target:** `bitflags.ExampleGenerated [ZERO]`
 - **Similarity:** 0.00
