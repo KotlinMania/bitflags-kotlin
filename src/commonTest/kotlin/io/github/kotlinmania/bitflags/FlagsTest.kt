@@ -1,4 +1,4 @@
-// port-lint: tests tests/flags.rs
+// port-lint: tests src/tests/flags.rs
 package io.github.kotlinmania.bitflags
 
 import kotlin.test.Test
@@ -9,6 +9,41 @@ import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 class FlagsTest {
+    @Test
+    fun cases() {
+        val flags = TestFlags.FLAGS.map { Pair(it.name(), it.value().bits()) }
+
+        assertEquals(
+            listOf(
+                Pair("A", 1uL),
+                Pair("B", 1uL shl 1),
+                Pair("C", 1uL shl 2),
+                Pair("ABC", 1uL or (1uL shl 1) or (1uL shl 2)),
+            ),
+            flags,
+        )
+
+        assertEquals(0, TestEmpty.FLAGS.count())
+    }
+
+    public class ExternalTest {
+        @Test
+        public fun cases() {
+            val flags = TestExternal.FLAGS.map { Pair(it.name(), it.value().bits()) }
+
+            assertEquals(
+                listOf(
+                    Pair("A", 1uL),
+                    Pair("B", 1uL shl 1),
+                    Pair("C", 1uL shl 2),
+                    Pair("ABC", 1uL or (1uL shl 1) or (1uL shl 2)),
+                    Pair("", 0xFFuL),
+                ),
+                flags,
+            )
+        }
+    }
+
     @Test
     fun flagsDefinitionsMatchUpstreamOrder() {
         val flags = ExampleFlags.FLAGS.map { it.name() to it.value().bits() }

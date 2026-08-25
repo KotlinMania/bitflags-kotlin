@@ -12,7 +12,10 @@ import kotlin.native.HiddenFromObjC
 public data class NamedFlag<B : BitFlags<B>>(
     public val name: String,
     public val flag: B,
-)
+) {
+    public fun name(): String = name
+    public fun value(): B = flag
+}
 
 /**
  * Item yielded by flag iterators.

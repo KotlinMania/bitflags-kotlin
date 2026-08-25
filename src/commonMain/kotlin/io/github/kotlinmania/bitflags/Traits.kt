@@ -255,4 +255,12 @@ public abstract class BitFlags<B : BitFlags<B>>(
      * The bitwise negation of this flags value, truncated to known bits.
      */
     public fun complement(): B = fromBitsTruncate(bits().inv())
+
+    public infix fun or(other: B): B = union(other)
+    public infix fun and(other: B): B = intersection(other)
+    public infix fun xor(other: B): B = symmetricDifference(other)
+    public operator fun not(): B = complement()
+    public operator fun minus(other: B): B = difference(other)
+    public operator fun plus(other: B): B = union(other)
+    public operator fun compareTo(other: B): Int = bits().compareTo(other.bits())
 }
