@@ -1,3 +1,4 @@
+#if canImport(Testing)
 import Testing
 import Bitflags
 
@@ -9,3 +10,14 @@ struct BitflagsExportTests {
         #expect(kind.description == "EMPTY_FLAG")
     }
 }
+#elseif canImport(XCTest)
+import XCTest
+import Bitflags
+
+final class BitflagsExportTests: XCTestCase {
+    func testSwiftModuleLoads() throws {
+        let kind = ParseErrorKind.EMPTY_FLAG
+        XCTAssertEqual(kind.description, "EMPTY_FLAG")
+    }
+}
+#endif
