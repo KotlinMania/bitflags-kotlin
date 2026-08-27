@@ -12,7 +12,7 @@ public class IntersectionTest {
             listOf(
                 Pair(TestFlags.empty(), 0uL),
                 Pair(TestFlags.all(), 0uL),
-            )
+            ),
         )
 
         case(
@@ -21,21 +21,21 @@ public class IntersectionTest {
                 Pair(TestFlags.all(), 1uL or (1uL shl 1) or (1uL shl 2)),
                 Pair(TestFlags.A, 1uL),
                 Pair(TestFlags.fromBitsRetain(1uL shl 3), 0uL),
-            )
+            ),
         )
 
         case(
             TestFlags.fromBitsRetain(1uL shl 3),
             listOf(
                 Pair(TestFlags.fromBitsRetain(1uL shl 3), 1uL shl 3),
-            )
+            ),
         )
 
         case(
             TestOverlapping.AB,
             listOf(
                 Pair(TestOverlapping.BC, 1uL shl 1),
-            )
+            ),
         )
     }
 

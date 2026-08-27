@@ -13,21 +13,21 @@ public class IterTest {
         caseIter(listOf(1uL, 1uL shl 1), TestFlags.A or TestFlags.B)
         caseIter(
             listOf(1uL, 1uL shl 1, 1uL shl 3),
-            TestFlags.A or TestFlags.B or TestFlags.fromBitsRetain(1uL shl 3)
+            TestFlags.A or TestFlags.B or TestFlags.fromBitsRetain(1uL shl 3),
         )
         caseIter(listOf(1uL, 1uL shl 1, 1uL shl 2), TestFlags.ABC)
         caseIter(
             listOf(1uL, 1uL shl 1, 1uL shl 2, 1uL shl 3),
-            TestFlags.ABC or TestFlags.fromBitsRetain(1uL shl 3)
+            TestFlags.ABC or TestFlags.fromBitsRetain(1uL shl 3),
         )
         caseIter(
             listOf(1uL or (1uL shl 1) or (1uL shl 2)),
-            TestFlagsInvert.ABC
+            TestFlagsInvert.ABC,
         )
         caseIter(emptyList(), TestZero.ZERO)
         caseIter(
             listOf(1uL, 1uL shl 1, 1uL shl 2, 0b11111000uL),
-            TestExternal.all()
+            TestExternal.all(),
         )
 
         // iterNames
@@ -36,25 +36,25 @@ public class IterTest {
         caseIterNames(listOf(Pair("A", 1uL), Pair("B", 1uL shl 1)), TestFlags.A or TestFlags.B)
         caseIterNames(
             listOf(Pair("A", 1uL), Pair("B", 1uL shl 1)),
-            TestFlags.A or TestFlags.B or TestFlags.fromBitsRetain(1uL shl 3)
+            TestFlags.A or TestFlags.B or TestFlags.fromBitsRetain(1uL shl 3),
         )
         caseIterNames(
             listOf(Pair("A", 1uL), Pair("B", 1uL shl 1), Pair("C", 1uL shl 2)),
-            TestFlags.ABC
+            TestFlags.ABC,
         )
         caseIterNames(
             listOf(Pair("A", 1uL), Pair("B", 1uL shl 1), Pair("C", 1uL shl 2)),
-            TestFlags.ABC or TestFlags.fromBitsRetain(1uL shl 3)
+            TestFlags.ABC or TestFlags.fromBitsRetain(1uL shl 3),
         )
         caseIterNames(
             listOf(Pair("ABC", 1uL or (1uL shl 1) or (1uL shl 2))),
-            TestFlagsInvert.ABC
+            TestFlagsInvert.ABC,
         )
         caseIterNames(emptyList(), TestZero.ZERO)
         caseIterNames(listOf(Pair("A", 1uL)), TestOverlappingFull.A)
         caseIterNames(
             listOf(Pair("A", 1uL), Pair("D", 1uL shl 1)),
-            TestOverlappingFull.A or TestOverlappingFull.D
+            TestOverlappingFull.A or TestOverlappingFull.D,
         )
     }
 
@@ -80,12 +80,13 @@ public class IterTest {
     @Test
     public fun testDefinedNames() {
         val allNamed = TestFlags.FLAGS.filter { it.isNamed() }.map { Pair(it.name(), it.value().bits()) }
-        val expected = listOf(
-            Pair("A", 1uL),
-            Pair("B", 1uL shl 1),
-            Pair("C", 1uL shl 2),
-            Pair("ABC", 1uL or (1uL shl 1) or (1uL shl 2)),
-        )
+        val expected =
+            listOf(
+                Pair("A", 1uL),
+                Pair("B", 1uL shl 1),
+                Pair("C", 1uL shl 2),
+                Pair("ABC", 1uL or (1uL shl 1) or (1uL shl 2)),
+            )
         assertEquals(expected.size, allNamed.size)
         for (flag in expected) {
             assertTrue(allNamed.contains(flag), "Missing flag $flag")

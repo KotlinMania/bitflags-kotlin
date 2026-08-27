@@ -15,7 +15,7 @@ public class IntersectsTest {
                 Pair(TestFlags.B, false),
                 Pair(TestFlags.C, false),
                 Pair(TestFlags.fromBitsRetain(1uL shl 3), false),
-            )
+            ),
         )
 
         case(
@@ -28,7 +28,7 @@ public class IntersectsTest {
                 Pair(TestFlags.ABC, true),
                 Pair(TestFlags.fromBitsRetain(1uL shl 3), false),
                 Pair(TestFlags.fromBitsRetain(1uL or (1uL shl 3)), true),
-            )
+            ),
         )
 
         case(
@@ -40,7 +40,7 @@ public class IntersectsTest {
                 Pair(TestFlags.C, true),
                 Pair(TestFlags.ABC, true),
                 Pair(TestFlags.fromBitsRetain(1uL shl 3), false),
-            )
+            ),
         )
 
         case(
@@ -51,7 +51,7 @@ public class IntersectsTest {
                 Pair(TestFlags.B, false),
                 Pair(TestFlags.C, false),
                 Pair(TestFlags.fromBitsRetain(1uL shl 3), true),
-            )
+            ),
         )
 
         case(
@@ -60,7 +60,7 @@ public class IntersectsTest {
                 Pair(TestOverlapping.AB, true),
                 Pair(TestOverlapping.BC, true),
                 Pair(TestOverlapping.fromBitsRetain(1uL shl 1), true),
-            )
+            ),
         )
     }
 

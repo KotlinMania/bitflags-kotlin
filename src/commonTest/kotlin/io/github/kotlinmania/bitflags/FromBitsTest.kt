@@ -12,7 +12,7 @@ public class FromBitsTest {
         case(
             1uL or (1uL shl 1) or (1uL shl 2),
             1uL or (1uL shl 1) or (1uL shl 2),
-            TestFlags.fromBits(1uL or (1uL shl 1) or (1uL shl 2))
+            TestFlags.fromBits(1uL or (1uL shl 1) or (1uL shl 2)),
         )
         case(null, 1uL shl 3, TestFlags.fromBits(1uL shl 3))
         case(null, 1uL or (1uL shl 3), TestFlags.fromBits(1uL or (1uL shl 3)))

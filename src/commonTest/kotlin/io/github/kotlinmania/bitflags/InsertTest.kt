@@ -14,7 +14,7 @@ public class InsertTest {
                 Pair(TestFlags.A or TestFlags.B, 1uL or (1uL shl 1)),
                 Pair(TestFlags.empty(), 0uL),
                 Pair(TestFlags.fromBitsRetain(1uL shl 3), 1uL shl 3),
-            )
+            ),
         )
 
         case(
@@ -23,7 +23,7 @@ public class InsertTest {
                 Pair(TestFlags.A, 1uL),
                 Pair(TestFlags.empty(), 1uL),
                 Pair(TestFlags.B, 1uL or (1uL shl 1)),
-            )
+            ),
         )
     }
 
