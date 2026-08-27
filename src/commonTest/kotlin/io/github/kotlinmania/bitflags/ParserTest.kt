@@ -1,4 +1,4 @@
-// port-lint: tests parser.rs
+// port-lint: tests bitflags/src/parser.rs
 package io.github.kotlinmania.bitflags
 
 import kotlin.test.Test
