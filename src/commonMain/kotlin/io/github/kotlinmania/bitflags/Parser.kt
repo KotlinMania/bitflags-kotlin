@@ -1,4 +1,4 @@
-// port-lint: source bitflags/src/parser.rs
+// port-lint: source parser.rs
 @file:OptIn(kotlin.experimental.ExperimentalObjCRefinement::class)
 
 package io.github.kotlinmania.bitflags

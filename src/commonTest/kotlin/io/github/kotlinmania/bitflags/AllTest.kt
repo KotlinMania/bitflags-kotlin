@@ -1,4 +1,4 @@
-// port-lint: tests bitflags/src/src/tests/all.rs
+// port-lint: tests src/tests/all.rs
 package io.github.kotlinmania.bitflags
 
 import kotlin.test.Test

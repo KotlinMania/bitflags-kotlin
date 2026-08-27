@@ -1,4 +1,4 @@
-// port-lint: source bitflags/src/iter.rs
+// port-lint: source iter.rs
 @file:OptIn(kotlin.experimental.ExperimentalObjCRefinement::class)
 
 package io.github.kotlinmania.bitflags
