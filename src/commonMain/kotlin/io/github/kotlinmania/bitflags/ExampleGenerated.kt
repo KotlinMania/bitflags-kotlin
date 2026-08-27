@@ -1,4 +1,4 @@
-// port-lint: source example_generated.rs
+// port-lint: source bitflags/src/example_generated.rs
 @file:OptIn(kotlin.experimental.ExperimentalObjCRefinement::class)
 
 package io.github.kotlinmania.bitflags
