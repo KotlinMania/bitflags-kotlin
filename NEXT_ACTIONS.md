@@ -4,10 +4,10 @@ Based on AST analysis, here are the concrete next steps.
 
 ## Summary
 
-- **Files Present:** 5/98 (5.1%)
-- **Function parity:** 45/248 matched (target 243) — 18.1%
-- **Class/type parity:** 16/46 matched (target 34) — 34.8%
-- **Combined symbol parity:** 61/294 matched (target 277) — 20.7%
+- **Files Present:** 5/42 (11.9%)
+- **Function parity:** 45/134 matched (target 243) — 33.6%
+- **Class/type parity:** 16/20 matched (target 34) — 80.0%
+- **Combined symbol parity:** 61/154 matched (target 277) — 39.6%
 - **Average inline-code cosine:** 0.39 (function body across 5 matched files)
 - **Average documentation cosine:** 0.58 (doc text across 5 matched files)
 - **Cheat-zeroed Files:** 2
@@ -22,14 +22,14 @@ No incomplete high-dependency files detected.
 Critical missing files (>10 dependencies):
 
 1. **tests.flags** (25 deps)
-   - Path: `bitflags/src/tests/flags.rs`
+   - Path: `tests/flags.rs`
    - Essential for 25 other files
 
 ## Detailed Work Items
 
 Every matched file is listed below with function and type symbol parity.
 
-### 1. bitflags.iter
+### 1. iter
 
 - **Target:** `bitflags.Iter`
 - **Similarity:** 0.56
@@ -40,7 +40,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 2/4 matched (target 7)
 - **Missing types:** `Iter`, `IterNames`
 
-### 2. bitflags.traits
+### 2. traits
 
 - **Target:** `bitflags.Traits`
 - **Similarity:** 0.68
@@ -51,7 +51,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 9/9 matched
 - **Missing types:** _none_
 
-### 3. bitflags.parser
+### 3. parser
 
 - **Target:** `bitflags.Parser`
 - **Similarity:** 0.72
@@ -62,7 +62,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 5/5 matched (target 6)
 - **Missing types:** _none_
 
-### 4. bitflags.tests
+### 4. tests
 
 - **Target:** `bitflags.TestTypes [ZERO]`
 - **Similarity:** 0.00
@@ -73,7 +73,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 10)
 - **Missing types:** _none_
 
-### 5. bitflags.example_generated
+### 5. example_generated
 
 - **Target:** `bitflags.ExampleGenerated [ZERO]`
 - **Similarity:** 0.00

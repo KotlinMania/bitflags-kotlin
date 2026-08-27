@@ -1,4 +1,4 @@
-// port-lint: source bitflags/src/traits.rs
+// port-lint: source traits.rs
 @file:OptIn(kotlin.experimental.ExperimentalObjCRefinement::class)
 
 package io.github.kotlinmania.bitflags
