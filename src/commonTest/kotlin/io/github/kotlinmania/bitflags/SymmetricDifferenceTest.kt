@@ -13,7 +13,7 @@ public class SymmetricDifferenceTest {
                 Pair(TestFlags.empty(), 0uL),
                 Pair(TestFlags.all(), 1uL or (1uL shl 1) or (1uL shl 2)),
                 Pair(TestFlags.fromBitsRetain(1uL shl 3), 1uL shl 3),
-            )
+            ),
         )
 
         case(
@@ -22,7 +22,7 @@ public class SymmetricDifferenceTest {
                 Pair(TestFlags.empty(), 1uL),
                 Pair(TestFlags.A, 0uL),
                 Pair(TestFlags.all(), (1uL shl 1) or (1uL shl 2)),
-            )
+            ),
         )
 
         case(
@@ -30,7 +30,7 @@ public class SymmetricDifferenceTest {
             listOf(
                 Pair(TestFlags.ABC, (1uL shl 2) or (1uL shl 3)),
                 Pair(TestFlags.fromBitsRetain(1uL shl 3), 1uL or (1uL shl 1)),
-            )
+            ),
         )
     }
 

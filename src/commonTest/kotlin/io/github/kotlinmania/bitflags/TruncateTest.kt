@@ -9,13 +9,13 @@ public class TruncateTest {
     public fun cases() {
         case(
             TestFlags.ABC or TestFlags.fromBitsRetain(1uL shl 3),
-            TestFlags.ABC
+            TestFlags.ABC,
         )
         case(TestZero.empty(), TestZero.empty())
         case(TestZero.all(), TestZero.all())
         case(
             TestFlags.fromBitsRetain(1uL shl 3) or TestFlags.all(),
-            TestFlags.all()
+            TestFlags.all(),
         )
     }
 

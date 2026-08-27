@@ -14,7 +14,7 @@ public class UnionTest {
                 Pair(TestFlags.all(), 1uL or (1uL shl 1) or (1uL shl 2)),
                 Pair(TestFlags.empty(), 0uL),
                 Pair(TestFlags.fromBitsRetain(1uL shl 3), 1uL shl 3),
-            )
+            ),
         )
 
         case(
@@ -22,7 +22,7 @@ public class UnionTest {
             listOf(
                 Pair(TestFlags.A or TestFlags.B, 1uL or (1uL shl 1) or (1uL shl 2)),
                 Pair(TestFlags.A, 1uL or (1uL shl 2)),
-            )
+            ),
         )
     }
 

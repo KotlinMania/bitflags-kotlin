@@ -13,7 +13,7 @@ public class RemoveTest {
                 Pair(TestFlags.A, 0uL),
                 Pair(TestFlags.empty(), 0uL),
                 Pair(TestFlags.fromBitsRetain(1uL shl 3), 0uL),
-            )
+            ),
         )
 
         case(
@@ -22,7 +22,7 @@ public class RemoveTest {
                 Pair(TestFlags.A, 0uL),
                 Pair(TestFlags.empty(), 1uL),
                 Pair(TestFlags.B, 1uL),
-            )
+            ),
         )
 
         case(
@@ -30,7 +30,7 @@ public class RemoveTest {
             listOf(
                 Pair(TestFlags.A, (1uL shl 1) or (1uL shl 2)),
                 Pair(TestFlags.A or TestFlags.C, 1uL shl 1),
-            )
+            ),
         )
     }
 

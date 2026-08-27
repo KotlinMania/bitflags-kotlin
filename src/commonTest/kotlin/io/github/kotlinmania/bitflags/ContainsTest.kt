@@ -15,7 +15,7 @@ public class ContainsTest {
                 Pair(TestFlags.B, false),
                 Pair(TestFlags.C, false),
                 Pair(TestFlags.fromBitsRetain(1uL shl 3), false),
-            )
+            ),
         )
 
         case(
@@ -28,7 +28,7 @@ public class ContainsTest {
                 Pair(TestFlags.ABC, false),
                 Pair(TestFlags.fromBitsRetain(1uL shl 3), false),
                 Pair(TestFlags.fromBitsRetain(1uL or (1uL shl 3)), false),
-            )
+            ),
         )
 
         case(
@@ -40,7 +40,7 @@ public class ContainsTest {
                 Pair(TestFlags.C, true),
                 Pair(TestFlags.ABC, true),
                 Pair(TestFlags.fromBitsRetain(1uL shl 3), false),
-            )
+            ),
         )
 
         case(
@@ -51,14 +51,14 @@ public class ContainsTest {
                 Pair(TestFlags.B, false),
                 Pair(TestFlags.C, false),
                 Pair(TestFlags.fromBitsRetain(1uL shl 3), true),
-            )
+            ),
         )
 
         case(
             TestZero.ZERO,
             listOf(
-                Pair(TestZero.ZERO, true)
-            )
+                Pair(TestZero.ZERO, true),
+            ),
         )
 
         case(
@@ -67,7 +67,7 @@ public class ContainsTest {
                 Pair(TestOverlapping.AB, true),
                 Pair(TestOverlapping.BC, false),
                 Pair(TestOverlapping.fromBitsRetain(1uL shl 1), true),
-            )
+            ),
         )
 
         case(
@@ -77,7 +77,7 @@ public class ContainsTest {
                 Pair(TestExternal.B, true),
                 Pair(TestExternal.C, true),
                 Pair(TestExternal.fromBitsRetain((1uL shl 5) or (1uL shl 7)), true),
-            )
+            ),
         )
     }
 

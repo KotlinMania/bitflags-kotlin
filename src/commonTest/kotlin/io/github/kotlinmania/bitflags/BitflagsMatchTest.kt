@@ -12,8 +12,11 @@ public class MatchFlags private constructor(
     bits: ULong,
 ) : BitFlags<MatchFlags>(bits) {
     override fun flags(): List<Flag<MatchFlags>> = FLAGS
+
     override fun fromBitsRetain(bits: ULong): MatchFlags = MatchFlags(bits)
+
     override fun equals(other: Any?): Boolean = other is MatchFlags && bits() == other.bits()
+
     override fun hashCode(): Int = bits().hashCode()
 
     public companion object {
@@ -22,21 +25,23 @@ public class MatchFlags private constructor(
         public val C: MatchFlags = MatchFlags(1uL shl 2)
         public val D: MatchFlags = MatchFlags(1uL shl 3)
 
-        public val FLAGS: List<Flag<MatchFlags>> = listOf(
-            Flag("A", A),
-            Flag("B", B),
-            Flag("C", C),
-            Flag("D", D),
-        )
+        public val FLAGS: List<Flag<MatchFlags>> =
+            listOf(
+                Flag("A", A),
+                Flag("B", B),
+                Flag("C", C),
+                Flag("D", D),
+            )
 
         public fun empty(): MatchFlags = MatchFlags(0uL)
+
         public fun all(): MatchFlags = empty().all()
     }
 }
 
 public class BitflagsMatchTest {
-    private fun flagToString(flag: MatchFlags): String {
-        return when {
+    private fun flagToString(flag: MatchFlags): String =
+        when {
             flag == MatchFlags.A -> "A"
             flag == MatchFlags.B -> "B"
             flag == MatchFlags.C -> "C"
@@ -50,7 +55,6 @@ public class BitflagsMatchTest {
             flag == (MatchFlags.A or MatchFlags.B or MatchFlags.C or MatchFlags.D) -> "All flags"
             else -> "Unknown combination"
         }
-    }
 
     @Test
     public fun testSingleFlags() {

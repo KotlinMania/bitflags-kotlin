@@ -12,7 +12,7 @@ public class FromBitsTruncateTest {
         case(
             1uL or (1uL shl 1) or (1uL shl 2),
             1uL or (1uL shl 1) or (1uL shl 2),
-            TestFlags.fromBitsTruncate(1uL or (1uL shl 1) or (1uL shl 2))
+            TestFlags.fromBitsTruncate(1uL or (1uL shl 1) or (1uL shl 2)),
         )
         case(0uL, 1uL shl 3, TestFlags.fromBitsTruncate(1uL shl 3))
         case(1uL, 1uL or (1uL shl 3), TestFlags.fromBitsTruncate(1uL or (1uL shl 3)))

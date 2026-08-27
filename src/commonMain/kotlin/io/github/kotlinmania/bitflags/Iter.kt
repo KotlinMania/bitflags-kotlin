@@ -14,6 +14,7 @@ public data class NamedFlag<B : BitFlags<B>>(
     public val flag: B,
 ) {
     public fun name(): String = name
+
     public fun value(): B = flag
 }
 
