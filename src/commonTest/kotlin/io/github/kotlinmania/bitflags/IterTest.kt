@@ -1,4 +1,4 @@
-// port-lint: tests src/tests/iter.rs
+// port-lint: tests iter.rs
 package io.github.kotlinmania.bitflags
 
 import kotlin.test.Test

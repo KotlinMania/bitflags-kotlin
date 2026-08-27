@@ -31,7 +31,7 @@ Every matched file is listed below with function and type symbol parity.
 
 ### 1. iter
 
-- **Target:** `bitflags.Iter [PROVENANCE-FALLBACK]`
+- **Target:** `bitflags.Iter`
 - **Similarity:** 0.56
 - **Dependents:** 0
 - **Priority Score:** 20804.4
@@ -39,9 +39,6 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 2/4 matched (target 7)
 - **Missing types:** `Iter`, `IterNames`
-- **Provenance warning:** port-lint provenance header matched only by basename: `tests:src/tests/iter.rs` vs expected `iter.rs`
-- **Proposed provenance header:** `// port-lint: tests iter.rs` (current: `// port-lint: tests src/tests/iter.rs`)
-- **Lint issues:** 1
 
 ### 2. traits
 
@@ -56,7 +53,7 @@ Every matched file is listed below with function and type symbol parity.
 
 ### 3. parser
 
-- **Target:** `bitflags.Parser [PROVENANCE-FALLBACK]`
+- **Target:** `bitflags.Parser`
 - **Similarity:** 0.72
 - **Dependents:** 0
 - **Priority Score:** 1502.8
@@ -64,9 +61,6 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 5/5 matched (target 6)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only by basename: `tests:src/tests/parser.rs` vs expected `parser.rs`
-- **Proposed provenance header:** `// port-lint: tests parser.rs` (current: `// port-lint: tests src/tests/parser.rs`)
-- **Lint issues:** 1
 
 ### 4. tests
 
@@ -98,17 +92,4 @@ For each file to be considered "complete":
 - All tests ported
 - Documentation ported
 - port-lint header present
-
-## Reexport / Wiring Modules
-
-These files match `reexport_modules` patterns in `.ast_distance_config.json`. They are filtered out of
-normal priority and missing-file ladders because they are wiring
-modules, not direct logic ports. Consult them for call-site routing;
-do not treat them as the next implementation target by default.
-
-### Missing
-
-| Source | Expected target | Deps | Source path | Expected path |
-|--------|-----------------|------|-------------|---------------|
-| `lib` | `Lib` | 0 | `lib.rs` | `Lib.kt` |
 
