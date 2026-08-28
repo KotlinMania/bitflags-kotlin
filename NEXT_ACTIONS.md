@@ -5,12 +5,12 @@ Based on AST analysis, here are the concrete next steps.
 ## Summary
 
 - **Files Present:** 5/42 (11.9%)
-- **Function parity:** 45/134 matched (target 243) — 33.6%
-- **Class/type parity:** 16/20 matched (target 34) — 80.0%
-- **Combined symbol parity:** 61/154 matched (target 277) — 39.6%
+- **Function parity:** 45/134 matched (target 229) — 33.6%
+- **Class/type parity:** 16/20 matched (target 32) — 80.0%
+- **Combined symbol parity:** 61/154 matched (target 261) — 39.6%
 - **Average inline-code cosine:** 0.39 (function body across 5 matched files)
 - **Average documentation cosine:** 0.58 (doc text across 5 matched files)
-- **Cheat-zeroed Files:** 2
+- **Cheat-zeroed Files:** 1
 - **Critical Issues:** 3 files with <0.60 function similarity
 
 ## Priority 1: Fix Incomplete High-Dependency Files
@@ -73,17 +73,6 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 10)
 - **Missing types:** _none_
 
-### 5. example_generated
-
-- **Target:** `bitflags.ExampleGenerated [ZERO]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 10.0
-- **Functions:** 0/0 matched (target 14)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 2)
-- **Missing types:** _none_
-
 ## Success Criteria
 
 For each file to be considered "complete":
@@ -92,4 +81,17 @@ For each file to be considered "complete":
 - All tests ported
 - Documentation ported
 - port-lint header present
+
+## Reexport / Wiring Modules
+
+These files match `reexport_modules` patterns in `.ast_distance_config.json`. They are filtered out of
+normal priority and missing-file ladders because they are wiring
+modules, not direct logic ports. Consult them for call-site routing;
+do not treat them as the next implementation target by default.
+
+### Matched
+
+| Source | Target | Path |
+|--------|--------|------|
+| `example_generated` | `bitflags.ExampleGenerated` | `example_generated` |
 
