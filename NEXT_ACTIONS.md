@@ -4,10 +4,10 @@ Based on AST analysis, here are the concrete next steps.
 
 ## Summary
 
-- **Files Present:** 5/42 (11.9%)
-- **Function parity:** 45/134 matched (target 229) — 33.6%
-- **Class/type parity:** 16/20 matched (target 32) — 80.0%
-- **Combined symbol parity:** 61/154 matched (target 261) — 39.6%
+- **Files Present:** 5/98 (5.1%)
+- **Function parity:** 45/248 matched (target 229) — 18.1%
+- **Class/type parity:** 16/46 matched (target 32) — 34.8%
+- **Combined symbol parity:** 61/294 matched (target 261) — 20.7%
 - **Average inline-code cosine:** 0.39 (function body across 5 matched files)
 - **Average documentation cosine:** 0.58 (doc text across 5 matched files)
 - **Cheat-zeroed Files:** 1
@@ -22,14 +22,14 @@ No incomplete high-dependency files detected.
 Critical missing files (>10 dependencies):
 
 1. **tests.flags** (25 deps)
-   - Path: `tests/flags.rs`
+   - Path: `bitflags/src/tests/flags.rs`
    - Essential for 25 other files
 
 ## Detailed Work Items
 
 Every matched file is listed below with function and type symbol parity.
 
-### 1. iter
+### 1. bitflags.iter
 
 - **Target:** `bitflags.Iter`
 - **Similarity:** 0.56
@@ -40,7 +40,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 2/4 matched (target 7)
 - **Missing types:** `Iter`, `IterNames`
 
-### 2. traits
+### 2. bitflags.traits
 
 - **Target:** `bitflags.Traits`
 - **Similarity:** 0.68
@@ -51,7 +51,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 9/9 matched
 - **Missing types:** _none_
 
-### 3. parser
+### 3. bitflags.parser
 
 - **Target:** `bitflags.Parser`
 - **Similarity:** 0.72
@@ -62,7 +62,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 5/5 matched (target 6)
 - **Missing types:** _none_
 
-### 4. tests
+### 4. bitflags.tests
 
 - **Target:** `bitflags.TestTypes [ZERO]`
 - **Similarity:** 0.00
@@ -93,5 +93,5 @@ do not treat them as the next implementation target by default.
 
 | Source | Target | Path |
 |--------|--------|------|
-| `example_generated` | `bitflags.ExampleGenerated` | `example_generated` |
+| `bitflags.example_generated` | `bitflags.ExampleGenerated` | `bitflags/src/example_generated` |
 

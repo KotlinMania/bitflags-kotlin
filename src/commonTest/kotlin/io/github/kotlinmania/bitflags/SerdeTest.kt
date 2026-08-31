@@ -1,4 +1,4 @@
-// port-lint: tests external/serde.rs
+// port-lint: tests bitflags/src/external/serde.rs
 package io.github.kotlinmania.bitflags
 
 import kotlin.test.Test

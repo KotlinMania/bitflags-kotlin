@@ -1,4 +1,4 @@
-// port-lint: tests src/tests/symmetric_difference.rs
+// port-lint: tests bitflags/src/src/tests/symmetric_difference.rs
 package io.github.kotlinmania.bitflags
 
 import kotlin.test.Test

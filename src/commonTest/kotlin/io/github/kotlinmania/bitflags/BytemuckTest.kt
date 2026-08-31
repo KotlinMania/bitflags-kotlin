@@ -1,4 +1,4 @@
-// port-lint: tests external/bytemuck.rs
+// port-lint: tests bitflags/src/external/bytemuck.rs
 package io.github.kotlinmania.bitflags
 
 import kotlin.test.Test
