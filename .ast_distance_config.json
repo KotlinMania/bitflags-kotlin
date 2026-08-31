@@ -2,7 +2,7 @@
   "type": "port",
   "name": "bitflags-kotlin",
   "source": {
-    "path": "tmp/bitflags/src",
+    "path": "tmp",
     "lang": "rust"
   },
   "target": {
