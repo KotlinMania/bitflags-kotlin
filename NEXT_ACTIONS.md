@@ -4,10 +4,10 @@ Based on AST analysis, here are the concrete next steps.
 
 ## Summary
 
-- **Files Present:** 5/98 (5.1%)
-- **Function parity:** 45/248 matched (target 229) — 18.1%
-- **Class/type parity:** 16/46 matched (target 32) — 34.8%
-- **Combined symbol parity:** 61/294 matched (target 261) — 20.7%
+- **Files Present:** 5/42 (11.9%)
+- **Function parity:** 45/134 matched (target 229) — 33.6%
+- **Class/type parity:** 16/20 matched (target 32) — 80.0%
+- **Combined symbol parity:** 61/154 matched (target 261) — 39.6%
 - **Average inline-code cosine:** 0.39 (function body across 5 matched files)
 - **Average documentation cosine:** 0.58 (doc text across 5 matched files)
 - **Cheat-zeroed Files:** 1
@@ -22,7 +22,7 @@ No incomplete high-dependency files detected.
 Critical missing files (>10 dependencies):
 
 1. **tests.flags** (25 deps)
-   - Path: `src/tests/flags.rs`
+   - Path: `tests/flags.rs`
    - Essential for 25 other files
 
 ## Detailed Work Items
@@ -31,7 +31,7 @@ Every matched file is listed below with function and type symbol parity.
 
 ### 1. iter
 
-- **Target:** `bitflags.Iter [PROVENANCE-FALLBACK]`
+- **Target:** `bitflags.Iter`
 - **Similarity:** 0.56
 - **Dependents:** 0
 - **Priority Score:** 20804.4
@@ -39,15 +39,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 2/4 matched (target 7)
 - **Missing types:** `Iter`, `IterNames`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `iter.rs` vs expected `iter.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:iter.rs` vs expected `iter.rs`
-- **Proposed provenance header:** `// port-lint: source iter.rs` (current: `// port-lint: source iter.rs`)
-- **Proposed provenance header:** `// port-lint: tests iter.rs` (current: `// port-lint: tests iter.rs`)
-- **Lint issues:** 2
 
 ### 2. traits
 
-- **Target:** `bitflags.Traits [PROVENANCE-FALLBACK]`
+- **Target:** `bitflags.Traits`
 - **Similarity:** 0.68
 - **Dependents:** 0
 - **Priority Score:** 4003.2
@@ -55,13 +50,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 9/9 matched
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `traits.rs` vs expected `traits.rs`
-- **Proposed provenance header:** `// port-lint: source traits.rs` (current: `// port-lint: source traits.rs`)
-- **Lint issues:** 1
 
 ### 3. parser
 
-- **Target:** `bitflags.Parser [PROVENANCE-FALLBACK]`
+- **Target:** `bitflags.Parser`
 - **Similarity:** 0.72
 - **Dependents:** 0
 - **Priority Score:** 1502.8
@@ -69,15 +61,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 5/5 matched (target 6)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `parser.rs` vs expected `parser.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:parser.rs` vs expected `parser.rs`
-- **Proposed provenance header:** `// port-lint: source parser.rs` (current: `// port-lint: source parser.rs`)
-- **Proposed provenance header:** `// port-lint: tests parser.rs` (current: `// port-lint: tests parser.rs`)
-- **Lint issues:** 2
 
 ### 4. tests
 
-- **Target:** `bitflags.TestTypes [ZERO] [PROVENANCE-FALLBACK]`
+- **Target:** `bitflags.TestTypes [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
@@ -85,9 +72,6 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 10)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests.rs` vs expected `tests.rs`
-- **Proposed provenance header:** `// port-lint: source tests.rs` (current: `// port-lint: source tests.rs`)
-- **Lint issues:** 1
 
 ## Success Criteria
 
@@ -109,5 +93,5 @@ do not treat them as the next implementation target by default.
 
 | Source | Target | Path |
 |--------|--------|------|
-| `example_generated` | `bitflags.ExampleGenerated` | `src/example_generated` |
+| `example_generated` | `bitflags.ExampleGenerated` | `example_generated` |
 
