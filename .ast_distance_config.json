@@ -17,6 +17,19 @@
   },
   "reexport_modules": [
     "lib",
-    "example_generated"
+    "lib.rs",
+    "bitflags/src/lib.rs",
+    "example_generated",
+    "example_generated.rs",
+    "bitflags/src/example_generated.rs",
+    "external",
+    "external.rs",
+    "bitflags/src/external.rs",
+    "public",
+    "public.rs",
+    "bitflags/src/public.rs",
+    "internal",
+    "internal.rs",
+    "bitflags/src/internal.rs"
   ]
 }

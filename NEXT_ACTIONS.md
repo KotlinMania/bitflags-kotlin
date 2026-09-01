@@ -95,3 +95,12 @@ do not treat them as the next implementation target by default.
 |--------|--------|------|
 | `bitflags.example_generated` | `bitflags.ExampleGenerated` | `bitflags/src/example_generated` |
 
+### Missing
+
+| Source | Expected target | Deps | Source path | Expected path |
+|--------|-----------------|------|-------------|---------------|
+| `bitflags.external` | `bitflags.src.external.External` | 0 | `bitflags/src/external.rs` | `bitflags/src/external/External.kt` |
+| `bitflags.internal` | `bitflags.src.Internal` | 0 | `bitflags/src/internal.rs` | `bitflags/src/Internal.kt` |
+| `bitflags.lib` | `bitflags.src.Lib` | 0 | `bitflags/src/lib.rs` | `bitflags/src/Lib.kt` |
+| `bitflags.public` | `bitflags.src.Public` | 0 | `bitflags/src/public.rs` | `bitflags/src/Public.kt` |
+
