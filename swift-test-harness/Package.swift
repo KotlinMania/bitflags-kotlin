@@ -19,8 +19,6 @@ let package = Package(
                 .unsafeFlags([
                     "-L", "../build/swift-test",
                     "-lBitflags",
-                    "-Xlinker", "-rpath",
-                    "-Xlinker", "-rpath",
                 ]),
             ]
         ),
