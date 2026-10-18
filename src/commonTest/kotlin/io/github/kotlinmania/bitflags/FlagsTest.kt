@@ -197,7 +197,9 @@ class FlagsTest {
         }
         assertEquals(listOf(1uL, 2uL, 0b1000uL), collected)
 
-        val definedIter = IterDefinedNames.new(ExampleFlags.empty())
+        val definedIter =
+            io.github.kotlinmania.bitflags.DefinedNamedFlagIterator
+                .new(ExampleFlags.empty())
         val names = mutableListOf<String>()
         while (definedIter.hasNext()) {
             names.add(definedIter.next().name)
