@@ -42,11 +42,6 @@ public data class Flag<B : BitFlags<B>>(
 }
 
 /**
- * Common trait representing bitflags types.
- */
-public typealias Flags<B> = BitFlags<B>
-
-/**
  * An iterator over contained flag values.
  */
 public typealias Iter<B> = FlagIterator<B>

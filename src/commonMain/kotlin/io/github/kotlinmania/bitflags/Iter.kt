@@ -24,11 +24,6 @@ public data class NamedFlag<B : BitFlags<B>>(
 public typealias Item<B> = NamedFlag<B>
 
 /**
- * An iterator over all defined named flags.
- */
-public typealias IterDefinedNames<B> = DefinedNamedFlagIterator<B>
-
-/**
  * An iterator over contained flag values.
  *
  * Defined named flags are yielded first, with any remaining bits yielded as a
