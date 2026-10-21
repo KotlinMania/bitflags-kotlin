@@ -1,14 +1,9 @@
 // port-lint: source parser.rs
-@file:OptIn(kotlin.experimental.ExperimentalObjCRefinement::class)
-
 package io.github.kotlinmania.bitflags
-
-import kotlin.native.HiddenFromObjC
 
 /**
  * Encode a value as a hex string without `0x` prefix.
  */
-@HiddenFromObjC
 public interface WriteHex {
     /**
      * Write the value as hex into [writer].
@@ -19,7 +14,6 @@ public interface WriteHex {
 /**
  * Parse a value from a hex string without `0x` prefix.
  */
-@HiddenFromObjC
 public interface ParseHex<T> {
     /**
      * Parse the value from hex string [input].
@@ -74,8 +68,7 @@ public data class ParseError(
 /**
  * Display adapter for flags.
  */
-@HiddenFromObjC
-public class AsDisplay<B : BitFlags<B>>(
+public class AsDisplay<B : Flags<B>>(
     public val flags: B,
 ) {
     /**
@@ -93,8 +86,7 @@ public class AsDisplay<B : BitFlags<B>>(
  *
  * Any bits that aren't part of a contained flag will be formatted as a hex number.
  */
-@HiddenFromObjC
-public fun <B : BitFlags<B>> toWriter(flags: B, writer: Appendable) {
+public fun <B : Flags<B>> toWriter(flags: B, writer: Appendable) {
     var first = true
     val iter = flags.iterNames()
 
@@ -121,8 +113,7 @@ public fun <B : BitFlags<B>> toWriter(flags: B, writer: Appendable) {
  *
  * Bits not part of a contained named flag are formatted as a hexadecimal value.
  */
-@HiddenFromObjC
-public fun <B : BitFlags<B>> toText(flags: B): String =
+public fun <B : Flags<B>> toText(flags: B): String =
     buildString { toWriter(flags, this) }
 
 /**
@@ -131,8 +122,7 @@ public fun <B : BitFlags<B>> toText(flags: B): String =
  * This function will fail on any names that don't correspond to defined flags.
  * Unknown bits will be retained.
  */
-@HiddenFromObjC
-public fun <B : BitFlags<B>> fromStr(input: String, seed: B): B {
+public fun <B : Flags<B>> fromStr(input: String, seed: B): B {
     var parsedFlags = seed.empty()
     val trimmed = input.trim()
 
@@ -169,22 +159,19 @@ public fun <B : BitFlags<B>> fromStr(input: String, seed: B): B {
  *
  * Alias for [fromStr].
  */
-@HiddenFromObjC
-public fun <B : BitFlags<B>> fromText(input: String, seed: B): B = fromStr(input, seed)
+public fun <B : Flags<B>> fromText(input: String, seed: B): B = fromStr(input, seed)
 
 /**
  * Write a flags value as text to [writer], ignoring any unknown bits.
  */
-@HiddenFromObjC
-public fun <B : BitFlags<B>> toWriterTruncate(flags: B, writer: Appendable) {
+public fun <B : Flags<B>> toWriterTruncate(flags: B, writer: Appendable) {
     toWriter(flags.fromBitsTruncate(flags.bits()), writer)
 }
 
 /**
  * Write a flags value as text, ignoring unknown bits.
  */
-@HiddenFromObjC
-public fun <B : BitFlags<B>> toTextTruncate(flags: B): String =
+public fun <B : Flags<B>> toTextTruncate(flags: B): String =
     buildString { toWriterTruncate(flags, this) }
 
 /**
@@ -193,21 +180,18 @@ public fun <B : BitFlags<B>> toTextTruncate(flags: B): String =
  * This function will fail on any names that don't correspond to defined flags.
  * Unknown bits will be ignored.
  */
-@HiddenFromObjC
-public fun <B : BitFlags<B>> fromStrTruncate(input: String, seed: B): B =
+public fun <B : Flags<B>> fromStrTruncate(input: String, seed: B): B =
     seed.fromBitsTruncate(fromStr(input, seed).bits())
 
 /**
  * Parse a flags value from text and discard unknown bits.
  */
-@HiddenFromObjC
-public fun <B : BitFlags<B>> fromTextTruncate(input: String, seed: B): B = fromStrTruncate(input, seed)
+public fun <B : Flags<B>> fromTextTruncate(input: String, seed: B): B = fromStrTruncate(input, seed)
 
 /**
  * Write only the contained, defined, named flags in a flags value as text into [writer].
  */
-@HiddenFromObjC
-public fun <B : BitFlags<B>> toWriterStrict(flags: B, writer: Appendable) {
+public fun <B : Flags<B>> toWriterStrict(flags: B, writer: Appendable) {
     var first = true
     val iter = flags.iterNames()
 
@@ -223,8 +207,7 @@ public fun <B : BitFlags<B>> toWriterStrict(flags: B, writer: Appendable) {
 /**
  * Write only contained, defined, named flags in a flags value as text.
  */
-@HiddenFromObjC
-public fun <B : BitFlags<B>> toTextStrict(flags: B): String =
+public fun <B : Flags<B>> toTextStrict(flags: B): String =
     buildString { toWriterStrict(flags, this) }
 
 /**
@@ -233,8 +216,7 @@ public fun <B : BitFlags<B>> toTextStrict(flags: B): String =
  * This function will fail on any names that don't correspond to defined flags.
  * This function will fail to parse hex values.
  */
-@HiddenFromObjC
-public fun <B : BitFlags<B>> fromStrStrict(input: String, seed: B): B {
+public fun <B : Flags<B>> fromStrStrict(input: String, seed: B): B {
     var parsedFlags = seed.empty()
     val trimmed = input.trim()
 
@@ -266,5 +248,4 @@ public fun <B : BitFlags<B>> fromStrStrict(input: String, seed: B): B {
 /**
  * Parse a flags value from names only.
  */
-@HiddenFromObjC
-public fun <B : BitFlags<B>> fromTextStrict(input: String, seed: B): B = fromStrStrict(input, seed)
+public fun <B : Flags<B>> fromTextStrict(input: String, seed: B): B = fromStrStrict(input, seed)

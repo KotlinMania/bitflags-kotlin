@@ -1,15 +1,10 @@
 // port-lint: source iter.rs
-@file:OptIn(kotlin.experimental.ExperimentalObjCRefinement::class)
-
 package io.github.kotlinmania.bitflags
-
-import kotlin.native.HiddenFromObjC
 
 /**
  * A named flag yielded by flag iterators.
  */
-@HiddenFromObjC
-public data class NamedFlag<B : BitFlags<B>>(
+public data class NamedFlag<B : Flags<B>>(
     public val name: String,
     public val flag: B,
 ) {
@@ -19,37 +14,32 @@ public data class NamedFlag<B : BitFlags<B>>(
 }
 
 /**
- * Item yielded by flag iterators.
- */
-public typealias Item<B> = NamedFlag<B>
-
-/**
  * An iterator over contained flag values.
  *
  * Defined named flags are yielded first, with any remaining bits yielded as a
  * final flags value.
  */
-@HiddenFromObjC
-public class FlagIterator<B : BitFlags<B>> internal constructor(
-    flags: BitFlags<B>,
+public class Iter<B : Flags<B>> private constructor(
+    private val inner: IterNames<B>,
 ) : Iterator<B> {
-    private val inner = NamedFlagIterator(flags)
+    internal constructor(flags: Flags<B>) : this(IterNames(flags))
+
     private var done = false
 
     public companion object {
         /**
          * Create an iterator over the flags values in [flags].
          */
-        public fun <B : BitFlags<B>> new(flags: BitFlags<B>): FlagIterator<B> = FlagIterator(flags)
+        public fun <B : Flags<B>> new(flags: Flags<B>): Iter<B> = Iter(flags)
 
         /**
          * Internal constructor used by bitflags generation.
          */
-        public fun <B : BitFlags<B>> __private_const_new(
+        public fun <B : Flags<B>> privateConstNew(
             flags: List<Flag<B>>,
             source: B,
             remaining: B,
-        ): FlagIterator<B> = FlagIterator(source)
+        ): Iter<B> = Iter(IterNames.privateConstNew(flags, source, remaining))
     }
 
     override fun hasNext(): Boolean = !done && (inner.hasNext() || !inner.remaining().isEmpty())
@@ -74,14 +64,18 @@ public class FlagIterator<B : BitFlags<B>> internal constructor(
 /**
  * An iterator over contained, defined, named flags.
  */
-@HiddenFromObjC
-public class NamedFlagIterator<B : BitFlags<B>> internal constructor(
-    flags: BitFlags<B>,
+public class IterNames<B : Flags<B>> private constructor(
+    private val definitions: List<Flag<B>>,
+    private val source: B,
+    private var remainingValue: B,
 ) : Iterator<NamedFlag<B>> {
-    private val definitions = flags.flags()
+    internal constructor(flags: Flags<B>) : this(
+        flags.flags(),
+        flags.fromBitsRetain(flags.bits()),
+        flags.fromBitsRetain(flags.bits()),
+    )
+
     private var index = 0
-    private var remainingValue = flags.fromBitsRetain(flags.bits())
-    private val source = flags.fromBitsRetain(flags.bits())
     private var nextValue: NamedFlag<B>? = null
 
     /**
@@ -131,25 +125,24 @@ public class NamedFlagIterator<B : BitFlags<B>> internal constructor(
         /**
          * Create an iterator over the named flags in [flags].
          */
-        public fun <B : BitFlags<B>> new(flags: BitFlags<B>): NamedFlagIterator<B> = NamedFlagIterator(flags)
+        public fun <B : Flags<B>> new(flags: Flags<B>): IterNames<B> = IterNames(flags)
 
         /**
          * Internal constructor used by bitflags generation.
          */
-        public fun <B : BitFlags<B>> __private_const_new(
+        public fun <B : Flags<B>> privateConstNew(
             flags: List<Flag<B>>,
             source: B,
             remaining: B,
-        ): NamedFlagIterator<B> = NamedFlagIterator(source)
+        ): IterNames<B> = IterNames(flags, source, remaining)
     }
 }
 
 /**
  * An iterator over all defined named flags.
  */
-@HiddenFromObjC
-public class DefinedNamedFlagIterator<B : BitFlags<B>> internal constructor(
-    flags: BitFlags<B>,
+public class IterDefinedNames<B : Flags<B>> internal constructor(
+    flags: Flags<B>,
 ) : Iterator<NamedFlag<B>> {
     private val definitions = flags.flags()
     private var index = 0
@@ -159,7 +152,7 @@ public class DefinedNamedFlagIterator<B : BitFlags<B>> internal constructor(
         /**
          * Create an iterator over all defined named flags in [flags].
          */
-        public fun <B : BitFlags<B>> new(flags: BitFlags<B>): DefinedNamedFlagIterator<B> = DefinedNamedFlagIterator(flags)
+        public fun <B : Flags<B>> new(flags: Flags<B>): IterDefinedNames<B> = IterDefinedNames(flags)
     }
 
     override fun hasNext(): Boolean {

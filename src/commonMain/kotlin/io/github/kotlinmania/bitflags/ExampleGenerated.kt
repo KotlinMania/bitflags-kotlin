@@ -1,14 +1,9 @@
 // port-lint: source example_generated.rs
-@file:OptIn(kotlin.experimental.ExperimentalObjCRefinement::class)
-
 package io.github.kotlinmania.bitflags
-
-import kotlin.native.HiddenFromObjC
 
 /**
  * Example code shaped like generated flag output.
  */
-@HiddenFromObjC
 public class ExampleFlags private constructor(
     bits: ULong,
 ) : BitFlags<ExampleFlags>(bits) {
@@ -57,7 +52,6 @@ public class ExampleFlags private constructor(
 /**
  * An example flag set with an unnamed catch-all definition.
  */
-@HiddenFromObjC
 public class ExampleExternalFlags private constructor(
     bits: ULong,
 ) : BitFlags<ExampleExternalFlags>(bits) {

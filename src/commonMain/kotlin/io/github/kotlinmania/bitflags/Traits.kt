@@ -1,15 +1,10 @@
 // port-lint: source traits.rs
-@file:OptIn(kotlin.experimental.ExperimentalObjCRefinement::class)
-
 package io.github.kotlinmania.bitflags
-
-import kotlin.native.HiddenFromObjC
 
 /**
  * A defined flag value that may be named or unnamed.
  */
-@HiddenFromObjC
-public data class Flag<B : BitFlags<B>>(
+public data class Flag<B>(
     private val flagName: String,
     private val flagValue: B,
 ) {
@@ -37,52 +32,36 @@ public data class Flag<B : BitFlags<B>>(
         /**
          * Create a new flag with the given name and value.
          */
-        public fun <B : BitFlags<B>> new(name: String, value: B): Flag<B> = Flag(name, value)
+        public fun <B> new(name: String, value: B): Flag<B> = Flag(name, value)
     }
 }
 
 /**
- * An iterator over contained flag values.
- */
-public typealias Iter<B> = FlagIterator<B>
-
-/**
- * An iterator over contained, defined, named flags.
- */
-public typealias IterNames<B> = NamedFlagIterator<B>
-
-/**
  * Underlying integer storage representation for flags.
  */
-@HiddenFromObjC
 public interface Bits
 
 /**
  * Marker for primitive bit integer types.
  */
-@HiddenFromObjC
 public interface Primitive
 
 /**
  * Marker for public flags structures.
  */
-@HiddenFromObjC
 public interface PublicFlags
 
 /**
  * Marker interface for types generated or implementing the bitflags macro pattern.
  */
-@HiddenFromObjC
 public interface ImplementedByBitFlagsMacro
 
 /**
  * A set of defined flags using an unsigned integer as storage.
  *
- * Kotlin does not have macro-generated associated constants, so concrete
- * flag sets expose companion helpers and inherit the shared operations here.
+ * Concrete flag sets define their named values and exact bits conversion.
  */
-@HiddenFromObjC
-public abstract class BitFlags<B : BitFlags<B>>(
+public abstract class Flags<B : Flags<B>>(
     private val rawBits: ULong,
 ) {
     /**
@@ -164,17 +143,17 @@ public abstract class BitFlags<B : BitFlags<B>>(
     /**
      * Yield contained named flag values, followed by any remaining unknown bits.
      */
-    public fun iter(): FlagIterator<B> = FlagIterator(this)
+    public fun iter(): Iter<B> = Iter(this)
 
     /**
      * Yield contained named flag values only.
      */
-    public fun iterNames(): NamedFlagIterator<B> = NamedFlagIterator(this)
+    public fun iterNames(): IterNames<B> = IterNames(this)
 
     /**
      * Yield all named flags defined by this flag set.
      */
-    public fun iterDefinedNames(): DefinedNamedFlagIterator<B> = DefinedNamedFlagIterator(this)
+    public fun iterDefinedNames(): IterDefinedNames<B> = IterDefinedNames(this)
 
     /**
      * Whether all bits are unset.
@@ -265,3 +244,10 @@ public abstract class BitFlags<B : BitFlags<B>>(
 
     public operator fun compareTo(other: B): Int = bits().compareTo(other.bits())
 }
+
+/**
+ * Legacy flags contract for macro-generated flag sets.
+ */
+public abstract class BitFlags<B : BitFlags<B>>(
+    bits: ULong,
+) : Flags<B>(bits), ImplementedByBitFlagsMacro

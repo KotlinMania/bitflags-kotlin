@@ -51,9 +51,9 @@ public class TestFlags private constructor(
 
         public fun fromName(name: String): TestFlags? = empty().fromName(name)
 
-        public fun iter(): FlagIterator<TestFlags> = empty().iter()
+        public fun iter(): Iter<TestFlags> = empty().iter()
 
-        public fun iterNames(): NamedFlagIterator<TestFlags> = empty().iterNames()
+        public fun iterNames(): IterNames<TestFlags> = empty().iterNames()
     }
 }
 
@@ -103,9 +103,9 @@ public class TestFlagsInvert private constructor(
 
         public fun fromName(name: String): TestFlagsInvert? = empty().fromName(name)
 
-        public fun iter(): FlagIterator<TestFlagsInvert> = empty().iter()
+        public fun iter(): Iter<TestFlagsInvert> = empty().iter()
 
-        public fun iterNames(): NamedFlagIterator<TestFlagsInvert> = empty().iterNames()
+        public fun iterNames(): IterNames<TestFlagsInvert> = empty().iterNames()
     }
 }
 
@@ -149,9 +149,9 @@ public class TestZero private constructor(
 
         public fun fromName(name: String): TestZero? = empty().fromName(name)
 
-        public fun iter(): FlagIterator<TestZero> = empty().iter()
+        public fun iter(): Iter<TestZero> = empty().iter()
 
-        public fun iterNames(): NamedFlagIterator<TestZero> = empty().iterNames()
+        public fun iterNames(): IterNames<TestZero> = empty().iterNames()
     }
 }
 
@@ -370,9 +370,9 @@ public class TestOverlappingFull private constructor(
 
         public fun fromName(name: String): TestOverlappingFull? = empty().fromName(name)
 
-        public fun iter(): FlagIterator<TestOverlappingFull> = empty().iter()
+        public fun iter(): Iter<TestOverlappingFull> = empty().iter()
 
-        public fun iterNames(): NamedFlagIterator<TestOverlappingFull> = empty().iterNames()
+        public fun iterNames(): IterNames<TestOverlappingFull> = empty().iterNames()
     }
 }
 
@@ -424,9 +424,9 @@ public class TestExternal private constructor(
 
         public fun fromName(name: String): TestExternal? = empty().fromName(name)
 
-        public fun iter(): FlagIterator<TestExternal> = empty().iter()
+        public fun iter(): Iter<TestExternal> = empty().iter()
 
-        public fun iterNames(): NamedFlagIterator<TestExternal> = empty().iterNames()
+        public fun iterNames(): IterNames<TestExternal> = empty().iterNames()
     }
 }
 
