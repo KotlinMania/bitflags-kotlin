@@ -4,7 +4,7 @@ dependencyResolutionManagement {
         exclusiveContent {
             forRepository { maven { url = uri(providers.gradleProperty("producerRepository").get()) } }
             filter {
-                listOf("", "-android", "-jvm", "-macosarm64").forEach { suffix ->
+                listOf("", "-android", "-jvm", "-macosarm64", "-js", "-wasm-js", "-wasm-wasi").forEach { suffix ->
                     includeModule("io.github.kotlinmania", "bitflags-kotlin" + suffix)
                 }
             }

@@ -1,3 +1,12 @@
+import java.security.MessageDigest
+import java.util.Properties
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsEnvSpec
+import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension
+import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootEnvSpec
+import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
+import org.jetbrains.kotlin.gradle.targets.wasm.nodejs.WasmNodeJsEnvSpec
+import org.jetbrains.kotlin.gradle.targets.wasm.yarn.WasmYarnRootEnvSpec
 import groovy.json.JsonOutput
 import org.gradle.api.artifacts.component.ModuleComponentIdentifier
 import org.gradle.api.artifacts.component.ModuleComponentSelector
@@ -16,6 +25,11 @@ kotlin {
     }
     jvm()
     macosArm64()
+    js { nodejs() }
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs { nodejs() }
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmWasi { nodejs() }
     android {
         namespace = "io.github.kotlinmania.bitflags.consumer"
         compileSdk = 34
@@ -121,5 +135,64 @@ kotlin.targets.named("jvm") {
             }
         }
         tasks.named("jvmTest") { finalizedBy(writeJvmClasspath) }
+    }
+}
+
+// Use the producer's existing test-toolchain pins without selecting new versions.
+val producerProperties = Properties().apply {
+    file("../../gradle.properties").inputStream().use { load(it) }
+}
+rootProject.extensions.configure<NodeJsEnvSpec>("kotlinNodeJsSpec") {
+    version.set(producerProperties.getProperty("node.version"))
+}
+rootProject.extensions.configure<WasmNodeJsEnvSpec>("kotlinWasmNodeJsSpec") {
+    version.set(producerProperties.getProperty("wasm.node.version"))
+}
+rootProject.extensions.configure<YarnRootEnvSpec>("kotlinYarnSpec") {
+    version.set(producerProperties.getProperty("yarn.version"))
+    yarnLockAutoReplace.set(true)
+}
+rootProject.extensions.configure<WasmYarnRootEnvSpec>("kotlinWasmYarnSpec") {
+    version.set(producerProperties.getProperty("wasm.yarn.version"))
+    yarnLockAutoReplace.set(true)
+}
+rootProject.extensions.configure<YarnRootExtension>("kotlinYarn") {
+    producerProperties.stringPropertyNames().filter { it.startsWith("yarn.resolution.") }.forEach { key ->
+        val module = key.removePrefix("yarn.resolution.")
+        resolution(module, producerProperties.getProperty(key))
+        resolution("**/$module", producerProperties.getProperty(key))
+    }
+}
+rootProject.extensions.configure<NodeJsRootExtension>("kotlinNodeJs") {
+    versions.mocha.version = "12.0.0-beta-10"
+    versions.kotlinWebHelpers.version = "3.1.0"
+}
+
+listOf("js" to "jsNodeTest", "wasmJs" to "wasmJsNodeTest", "wasmWasi" to "wasmWasiNodeTest").forEach { (target, test) ->
+    val compilation = kotlin.targets.getByName(target).compilations.getByName("main")
+    val dependencies = configurations.getByName(compilation.compileDependencyConfigurationName)
+    val receipt = tasks.register("write${target.replaceFirstChar { it.uppercase() }}PublicationClasspath") {
+        doLast {
+            val entries = dependencies.incoming.artifacts.artifacts.map { artifact ->
+                mapOf(
+                    "component" to artifact.id.componentIdentifier.displayName,
+                    "file" to artifact.file.absolutePath,
+                    "sha256" to MessageDigest.getInstance("SHA-256").digest(artifact.file.readBytes())
+                        .joinToString("") { "%02x".format(it) },
+                    "attributes" to artifact.variant.attributes.keySet().associate {
+                        it.name to artifact.variant.attributes.getAttribute(it).toString()
+                    },
+                )
+            }
+            layout.buildDirectory.file("reports/publication/$target-classpath.json").get().asFile.apply {
+                parentFile.mkdirs()
+                writeText(JsonOutput.prettyPrint(JsonOutput.toJson(entries)) + "\n")
+            }
+        }
+    }
+    tasks.named(test) {
+        outputs.upToDateWhen { false }
+        finalizedBy(receipt)
+        dependsOn(if (target == "js") "kotlinUpgradeYarnLock" else "kotlinWasmUpgradeYarnLock")
     }
 }

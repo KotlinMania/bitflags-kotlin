@@ -15,3 +15,20 @@ Both consumer-owned public subclasses are intentionally visible to Native compil
 the previous hidden producer superclass must be rejected rather than hidden in the caller.
 Android raw compile/runtime classpaths are checked independently for duplicate classes.
 This is not Android-device execution, Linux/Windows runtime coverage, or Swift validation.
+
+
+## JS and Wasm scope
+
+The separate build also resolves JS, WasmJS and WASI root-coordinate variants exclusively
+from staging. Six named common tests execute independently on each Node runner. Selected
+component, platform attributes and payload hashes are retained per target. These are
+Kotlin-authored external KLIB consumers, not plain JavaScript callers of a product export.
+
+The producer has no JsExport declarations, TypeScript-declaration generation or main
+JavaScript/Wasm binary configuration. Its existing generated JavaScript/Wasm executables
+are test programs. No direct product JS/TypeScript surface, runtime wrong-type boundary
+or original ParseError-object identity is certified: fromStr currently throws an
+IllegalArgumentException carrying diagnostic text rather than returning ParseError.
+The immutable insert/remove return convention is tested explicitly; it is not Rust
+Copy-variable mutation parity. WASI KLIB/runtime evidence is separate from WasmJS interop;
+no JavaScript or TypeScript product API is invented for WASI.
